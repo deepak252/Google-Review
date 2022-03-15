@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place ID Finder</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  </head>
+  <link rel="stylesheet" href="./css/register.css">
+  <body>
+    <div class="form">
+      <h3>GENERATE QR</h3>
+      <div class="input-field">
+        <input
+          type="text"
+          placeholder="Name",
+          name="name",
+          id="name"
+        />
+        <p class = "error" id="name-error">Name is required</p>
+      </div>
+
+      <div class="input-field">
+        <input
+          type="text"
+          placeholder="Business / Store Name",
+          name="businessName",
+          id="business-name"
+        />
+        <p class = "error" id="business-name-error">Business name is required</p>
+      </div>
+
+      <div class="input-field">
+        <input
+          type="email"
+          placeholder="Business E-mail ID",
+          name="businessEmail",
+          id="business-email"
+        />
+        <p class = "error" id="business-email-error">Business email is required</p>
+      </div>
+
+      <div class="input-field">
+        <input
+          id="pac-input"
+          class="controls"
+          type="text"
+          placeholder="Business/Store Address"
+          name="businessAddress"
+          required
+        />
+        <p class = "error" id="business-address-error">Business address is required</p>
+        <p class="error" id="review-link-error">Enter valid business address</p>
+      </div>
+     
+      <!-- <label for="pac-input"   id="label-place-id" >Place ID</label>  -->
+      <input  type="text" id="review-link" name="placeID" placeholder="Enter business/store address to generate review link" readonly>
+          
+      <!-- <button id="btn-register" onclick="register()">REGISTER</button> -->
+      <button id="btn-register" onclick="createProfile()" >CREATE</button>
+      <!-- <div id="qrcode"></div> -->
+    </div>
+
+
+    
+    <div id="map"></div>
+    <div id="infowindow-content">
+      <span id="place-name" class="title"></span><br />
+      <strong>Place ID:</strong> <span id="place-id"></span><br />
+      <span id="place-address"></span>
+    </div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    
+    
+    
+    
+    <!--Initialize google maps API  -->
+    <script src="./js/init-map.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> -->
+    <!-- <script src="./js/generate-qr.js"></script> -->
+
+
+    <script src="./js/form-validator.js"></script>
+    <script src="./js/create-profile.js"></script>
+    
+
+
+  </body>
+
+</html>
+

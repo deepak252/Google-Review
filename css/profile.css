@@ -1,0 +1,35 @@
+body{
+    background-color: gainsboro;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#card{
+    background-color: white;
+    margin: 30px auto;
+    padding: 4px 30px 16px;
+
+    box-shadow: 2px 2px 12px 2px rgb(179, 179, 179);
+    max-width: 600px;
+    text-align: center;
+
+}
+
+.top{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px 0;
+    
+}
+
+.top #img1{
+    width: 100px;
+}
+.top #img2{
+    width: 160px
+}
+#qrcode{
+  margin: 40px auto 40px;
+  height: 300px;
+  width: 300px;
+}
