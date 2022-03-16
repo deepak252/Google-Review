@@ -81,7 +81,7 @@ var GOOGLE_MAP_KEY = "mykeyofgoogleapi";
 function loadScript() {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBQaV0oxAlyDYyWdVjbKK_K9_kQatta14s&callback=initMap&libraries=places&v=weekly&channel=2`
+  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBk7fcJxKbBe_EoyCYnFODDuykojXnuc3Y&callback=initMap&libraries=places&v=weekly&channel=2`
   document.body.appendChild(script);
 }
 window.onload = loadScript;
