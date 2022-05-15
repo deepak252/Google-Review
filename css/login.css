@@ -20,17 +20,6 @@ html, body {
 }
 
 
-/* .form input{
-  padding: 10px;
-  outline: none;
-  margin: 12px auto;
-  display: block;
-  width: calc(100% - 120px);
-  border-radius: 3px;
-  border: 2px solid gray;
-  max-width: 400px;
-} */
-
 .form .input-field{
   outline: none;
   margin: 12px auto;
@@ -70,7 +59,8 @@ html, body {
   background-color: rgb(247, 247, 247);
 } 
 
-.form #btn-register{
+
+.form #btn-login{
   background-color: rgb(189, 189, 189);
   margin-top: 30px;
   border: none;
@@ -81,9 +71,7 @@ html, body {
   border-radius: 2px;
   box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.3);
 }
-
-
-.form #btn-register:hover{
+.form #btn-login:hover{
     cursor: pointer;    
     background-color: rgb(208, 208, 208);
 }

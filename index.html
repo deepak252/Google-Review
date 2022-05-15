@@ -5,42 +5,40 @@
     <title>Place ID Finder</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
-<link rel="stylesheet" href="./css/register.css">
+<link rel="stylesheet" href="./css/index.css">
 
 <body>
     <div class="form">
-        <h3>GENERATE QR</h3>
-        <div class="input-field">
+        <h3>CREATE BUSINESS PROFILE</h3>
+        <!-- <div class="input-field">
             <input type="text" placeholder="Name" , name="name" , id="name" />
             <p class="error" id="name-error">Name is required</p>
-        </div>
+        </div> -->
 
         <div class="input-field">
             <input type="text" placeholder="Business / Store Name" , name="businessName" , id="business-name" />
-            <p class="error" id="business-name-error">Business name is required</p>
+            <p class="error" id="error-business-name"></p>
         </div>
 
         <div class="input-field">
             <input type="email" placeholder="Business E-mail ID" , name="businessEmail" , id="business-email" />
-            <p class="error" id="business-email-error">Business email is required</p>
+            <p class="error" id="error-business-email"></p>
         </div>
 
         <div class="input-field">
             <input id="pac-input" class="controls" type="text" placeholder="Business/Store Address"
                 name="businessAddress" required />
-            <p class="error" id="business-address-error">Business address is required</p>
-            <p class="error" id="review-link-error">Enter valid business address</p>
+            <p class="error" id="error-business-address"></p>
+            <!-- <p class="error" id="review-link-error">Enter valid business address</p> -->
         </div>
 
-        <!-- <label for="pac-input"   id="label-place-id" >Place ID</label>  -->
         <input type="text" id="review-link" name="placeID"
             placeholder="Enter business/store address to generate review link" readonly>
 
-        <!-- <button id="btn-register" onclick="register()">REGISTER</button> -->
-        <button id="btn-register" onclick="createProfile()">CREATE</button>
-        <!-- <div id="qrcode"></div> -->
+        <button id="btn-create-profile" onclick="createBusinessProfile()">CREATE</button>
+        <button id="btn-logout" onclick="logout()">LOGOUT</button>
+        <!-- <button id="btn-logout" onclick="getCurrentUserProfile()">GET PROFILE</button> -->
     </div>
-
 
 
     <div id="map"></div>
@@ -52,9 +50,6 @@
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 
-
-
-
     <!--Initialize google maps API  -->
     <script src="./js/init-map.js"></script>
 
@@ -65,12 +60,34 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script  src="./js/init-firebase.js"></script>
+    <script src="./js/firebase-auth-services.js"></script>
+    <script  src="./js/firebase-firestore-services.js"></script>
+
+    <script type="text/javascript">
+        // alert(auth.currentUser);
+        // console.log(auth.currentUser);
+        auth.onAuthStateChanged(async (user)=> {
+            if (user) {
+                
+                // User is signed in.
+                userId = user.uid;
+                var data = await getCurrentUserProfile();
+                //   alert(data);
+                if(data!==null && data!==undefined){
+                    window.location.href = "/profile.html";
+                }
+            } else {
+                window.location.href = "/login.html";
+                // No user is signed in.
+            }
+        });
+    </script>
 
 
-    <script src="./js/form-validator.js"></script>
-    <script src="./js/create-profile.js"></script>
+    <!-- <script src="./js/form-validator.js"></script> -->
+    <script src="./js/create-business-profile.js"></script>
 
-
+    
 
 </body>
 

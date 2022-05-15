@@ -27,7 +27,10 @@
         </div>
     </div>
 
-    <button onclick="downloadPDF()">download PDF</button>
+    <div class="footer">
+        <button id="btn-download-pdf" onclick="downloadPDF()">DOWNLOAD PDF</button>
+        <button id="btn-logout" onclick="logout()">LOGOUT</button>
+    </div>
     <script>
         
     </script>
@@ -42,21 +45,64 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="./js/generate-qr.js"></script>
 
-<script>
-    var userStr = localStorage.getItem("user");
 
-    if(userStr==null || userStr==undefined || userStr==""){
-        console.log(userStr=='');
-        console.log(userStr );
-        window.location.href = "/register.html"
-    }
-    const user = JSON.parse(userStr);
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="./js/init-firebase.js"></script>
 
-    document.getElementById("company-name").innerText=`Company Name :-  ${user.businessName}`;
-    document.getElementById("company-address").innerText= `Company Address :-  ${user.businessAddress}`;
-    document.getElementById("review-link").innerText= `${user.reviewLink}`;
-    document.getElementById("review-link").href= `${user.reviewLink}`;
-    generateQR(user.reviewLink);
+<script src="./js/firebase-error-handler.js"></script>
+<script src="./js/firebase-auth-services.js"></script>
+<script src="./js/firebase-firestore-services.js"></script>
+
+
+<script async>
+
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            // User signed in.
+            userId = user.uid;
+            var data = await getCurrentUserProfile();
+            if (data !== null && data !== undefined) {
+                document.getElementById("company-name").innerText=`Company Name :-  ${data.businessName}`;
+                document.getElementById("company-address").innerText= `Company Address :-  ${data.businessAddress}`;
+                document.getElementById("review-link").innerText= `${data.reviewLink}`;
+                document.getElementById("review-link").href= `${data.reviewLink}`;
+                generateQR(data.reviewLink);
+            }else{
+                window.location.href = "/";
+            }
+        } else {
+            window.location.href = "/login.html";
+        }
+    });
+
+        //   alert(data);
+    // var userStr = localStorage.getItem("user");
+
+    // if(userStr==null || userStr==undefined || userStr==""){
+    //     console.log(userStr=='');
+    //     console.log(userStr );
+    //     window.location.href = "/register.html"
+    // }
+    // const user = JSON.parse(userStr);
+
+    // document.getElementById("company-name").innerText=`Company Name :-  ${user.businessName}`;
+    // document.getElementById("company-address").innerText= `Company Address :-  ${user.businessAddress}`;
+    // document.getElementById("review-link").innerText= `${user.reviewLink}`;
+    // document.getElementById("review-link").href= `${user.reviewLink}`;
+    // generateQR(user.reviewLink);
+</script>
+
+<script type="text/javascript">
+    // alert(auth.currentUser);
+    // console.log(auth.currentUser);
+    // auth.onAuthStateChanged(async (user) => {
+    //     if (!user) {
+    //         // User not signed in.
+    //         window.location.href = "/login.html";
+    //     } 
+    // });
 </script>
 
 </html>

@@ -5,15 +5,11 @@
     <title>Place ID Finder</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
-<link rel="stylesheet" href="./css/register.css">
+<link rel="stylesheet" href="./css/login.css">
 
 <body>
     <div class="form">
-        <h3>Create Account</h3>
-        <div class="input-field">
-            <input type="text" placeholder="Name" , name="name" , id="name" />
-            <p class="error" id="error-name"></p>
-        </div>
+        <h3>Login</h3>
 
         <div class="input-field">
             <input type="email" placeholder="E-mail ID" , name="email" , id="email" />
@@ -25,24 +21,16 @@
             <p class="error" id="error-password"></p>
         </div>
 
-        <div class="input-field">
-            <input type="password" placeholder="Confirm Password" , name="confirmPassword" , id="confirm-password" />
-            <p class="error" id="error-confirm-password"></p>
-        </div>
 
-
-        <button id="btn-register" onclick="createUser()">REGISTER</button>
-        <p>Already have an account? <a href="/login.html" class="href"> Login</a></p>
-        
+        <button id="btn-login" onclick="login()">LOGIN</button>
+        <p>New user? <a href="/register.html" class="href"> Register here</a></p>
     </div>
-
-
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="./js/init-firebase.js"></script>
-    
+
     <script src="./js/firebase-error-handler.js"></script>
     <script src="./js/firebase-auth-services.js"></script>
 
@@ -58,10 +46,6 @@
             }
         });
     </script>
-
-    <!-- <script type="text/javascript">
-        alert(auth.currentUser);
-    </script> -->
 
 
 
