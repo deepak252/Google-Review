@@ -57,8 +57,14 @@
 
 
 <script async>
+    var pathName = window.location.pathname.toString();
+    var rootPathName = pathName.slice(0, pathName.lastIndexOf('/'));
+    document.getElementById("img1").src = `${rootPathName}/images/dgtlmart-logo.png`;
+        document.getElementById("img2").src = `${rootPathName}/images/google-review-logo.jpg`;
 
     auth.onAuthStateChanged(async (user) => {
+        
+        
         if (user) {
             // User signed in.
             userId = user.uid;
@@ -70,10 +76,10 @@
                 document.getElementById("review-link").href= `${data.reviewLink}`;
                 generateQR(data.reviewLink);
             }else{
-                window.location.href = "/";
+                window.location.href = rootPathName+"/index.html";
             }
         } else {
-            window.location.href = "/login.html";
+            window.location.href = rootPathName +"/login.html";
         }
     });
 
@@ -94,15 +100,6 @@
     // generateQR(user.reviewLink);
 </script>
 
-<script type="text/javascript">
-    // alert(auth.currentUser);
-    // console.log(auth.currentUser);
-    // auth.onAuthStateChanged(async (user) => {
-    //     if (!user) {
-    //         // User not signed in.
-    //         window.location.href = "/login.html";
-    //     } 
-    // });
-</script>
+
 
 </html>

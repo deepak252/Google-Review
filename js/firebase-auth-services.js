@@ -37,29 +37,41 @@ const createUser = () =>{
     }
 
     if(isFormValid){
+        var formRef = document.getElementById("form");
+        var pleaseWaitRef = document.getElementById("please-wait");
+        formRef.style.display = "none";
+        pleaseWaitRef.style.display = "flex";
+        
         auth.createUserWithEmailAndPassword(emailRef.value, passwordRef.value).then((success) => {
-            var user = auth.currentUser;
-            var uid;
-            if (user != null) {
-                uid = user.uid;
+            // var user = auth.currentUser;
+            // var uid;
+            // if (user != null) {
+            //     uid = user.uid;
 
-                var userData = {
-                    uid,
-                    'name': uNameRef.value,
-                    'email':emailRef.value,
-                }
-                //Adding userData to firestore database
-                db.collection("users").doc(uid)
-                    .set(userData)
-                    .then((res) => {
-                        console.log("User added successfully");
-                    })
-                    .catch((error) => {
-                        alert("Something went wrong");
-                        console.error("Error adding document: ", error);
-                    });
-                console.log("Account created successfully : ", user);
-            }
+            //     var userData = {
+            //         'uid': uid,
+            //         'name': uNameRef.value,
+            //         'email':emailRef.value,
+            //     }
+            //     //Adding userData to firestore database
+            //     db.doc(`users/${uid}`)
+            //         .set(userData)
+            //         .then((res) => {
+            //             console.log("User added successfully");
+            //             formRef.style.display = "block";
+            //             pleaseWaitRef.style.display = "none";
+            //         })
+            //         .catch((error) => {
+            //             alert("Something went wrong");
+            //             console.error("Error adding document: ", error);
+            //             formRef.style.display = "block";
+            //             pleaseWaitRef.style.display = "none";
+            //         });
+            //     // console.log("Account created successfully : ", user);
+            // }else{
+            //     formRef.style.display = "block";
+            //     pleaseWaitRef.style.display = "none";
+            // }
 
             // db.collection("users").add(userData)
             // .then((docRef) => {
@@ -70,6 +82,8 @@ const createUser = () =>{
             // });
 
         }).catch((error) => {
+            formRef.style.display = "block";
+            pleaseWaitRef.style.display = "none";
             alert(emailAuthException(error.code));
             // alert(error.message);
             // console.log(error.code," : ",error.message);
@@ -103,15 +117,23 @@ const login = () => {
     }
 
     if (isFormValid) {
+        var formRef = document.getElementById("form");
+        var pleaseWaitRef = document.getElementById("please-wait");
+        formRef.style.display = "none";
+        pleaseWaitRef.style.display = "flex";
         auth.signInWithEmailAndPassword(emailRef.value, passwordRef.value)
             .then((userCredential) => {
                 // Signed in 
+                formRef.style.display = "block";
+                pleaseWaitRef.style.display = "none";
                 const user = userCredential.user;
-                console.log("User signed in : ", userCredential)
+                console.log("User signed in : ", userCredential);
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                // const errorCode = error.code;
+                // const errorMessage = error.message;
+                formRef.style.display = "block";
+                pleaseWaitRef.style.display = "none";
                 alert(emailAuthException(error.code));
                 
             });

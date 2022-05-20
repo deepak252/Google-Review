@@ -13,11 +13,3 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 var userId=null;
-// auth.onAuthStateChanged(function (user) {
-//     if (user) {
-//         // User is signed in.
-//         window.location.href = "/"
-//     } else {
-//         // No user is signed in.
-//     }
-// });

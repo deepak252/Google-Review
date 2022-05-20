@@ -5,18 +5,26 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #E6E9F3;
-  font-family: 'ubuntu';
+  font-family: 'Lato', sans-serif;
+}
+
+.form-container{
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .form{
   box-sizing: border-box;
   text-align: center;
   background-color: white;
-  margin: 50px auto;
-  padding: 20px 10px 40px 10px;
-  border-radius: 2px;
-  max-width: 500px;
-  box-shadow: 4px 4px 14px 4px gray;
+  margin-top: 50px;
+  padding: 30px 30px;
+  width: 90vw;
+  max-width: 550px;
+  box-shadow: 1px 1px 12px 4px rgb(202, 202, 202);
 }
 
 
@@ -46,54 +54,53 @@ html, body {
     border: 1px solid red;
 }
 
+
 .form #review-link{
-  padding: 12px 10px;
-  outline: none;
-  margin: 12px auto;
-  display: block;
-  width: calc(100% - 120px);
-  border-radius: 2px;
   border: none;
   border-bottom: 3px solid gray;
   background-color: rgb(247, 247, 247);
 } 
+
 
 .form #btn-create-profile{
   background-color: rgb(22, 74, 189);
   margin-top: 30px;
   border: none;
   padding: 14px;
-  width: 80%;
   color: white;
   font-weight: bold;
   font-size: 16px;
-  border-radius: 2px;
-  box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgb(22, 74, 189);
+  transition: background-color 200ms linear;
 }
 .form #btn-create-profile:hover{
     cursor: pointer;    
-    background-color: rgb(9, 44, 119);
+    background-color: white;
+    color : rgb(22, 74, 189);
+    transition: background-color 200ms linear;
 }
 
 
 
 .form #btn-logout{
-  /* background-color: rgb(235, 44, 44); */
-  margin-top: 30px;
-  /* border: none; */
+  margin: 15px 0;
   padding: 14px;
-  width: 80%;
   color: rgb(235, 44, 44);
   font-weight: bold;
   font-size: 16px;
-  border: 2px solid rgb(235, 44, 44);
-  border-radius: 2px;
-  box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(235, 44, 44);
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  transition: background-color 200ms linear;
 }
 .form #btn-logout:hover{
     cursor: pointer;    
     background-color: rgb(235, 44, 44);
     color: white;
+    transition: background-color 200ms linear;
 }
 
 /* Optional: Makes the sample page fill the window. */
@@ -101,7 +108,8 @@ html, body {
 #map {
   height: 50%;
   margin: 50px auto;
-  max-width: 500px;
+  width: 90vw;
+  max-width: 550px;
 }
 
 #pac-input{
@@ -149,3 +157,35 @@ html, body {
   display: inline-block;
 }
 
+
+#please-wait{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+#loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin: 20px auto;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

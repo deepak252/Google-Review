@@ -47,27 +47,27 @@ function createBusinessProfile(){
             businessEmail : businessEmailRef.value,
             businessAddress: businessAddressRef.value,
             reviewLink: reviewLinkRef.value
-        })
+        });
     }
 
 }
 
 
-function persistData(businessNameRef,
-    businessEmailRef,
-    businessAddressRef,
-    reviewLinkRef){
+// function persistData(businessNameRef,
+//     businessEmailRef,
+//     businessAddressRef,
+//     reviewLinkRef){
 
-    const user = {
-        "businessName": businessNameRef.value.trim(),
-        "businessEmail": businessEmailRef.value.trim(),
-        "businessAddress": businessAddressRef.value.trim(),
-        "reviewLink":  reviewLinkRef.value.trim()
-    }
+//     const user = {
+//         "businessName": businessNameRef.value.trim(),
+//         "businessEmail": businessEmailRef.value.trim(),
+//         "businessAddress": businessAddressRef.value.trim(),
+//         "reviewLink":  reviewLinkRef.value.trim()
+//     }
     
-    localStorage.setItem("user", JSON.stringify(user));
+//     localStorage.setItem("user", JSON.stringify(user));
 
-}
+// }
 
 
 
