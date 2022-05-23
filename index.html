@@ -29,7 +29,7 @@
             </div>
         
             <div class="input-field">
-                <input type="email" placeholder="Business E-mail ID" , name="businessEmail" , id="business-email" />
+                <input type="text"  placeholder="Business E-mail ID" , name="businessEmail" , id="business-email" />
                 <p class="error" id="error-business-email"></p>
             </div>
         
@@ -81,11 +81,11 @@
 
     <script type="text/javascript">
         var formRef = document.getElementsByClassName("form")[0];
-            var pleaseWaitRef = document.getElementById("please-wait");
-            var googleMapRef = document.getElementById("map");
-            formRef.style.display = "none";
-            googleMapRef.style.display = "none";
-            pleaseWaitRef.style.display = "flex";
+        var pleaseWaitRef = document.getElementById("please-wait");
+        var googleMapRef = document.getElementById("map");
+        formRef.style.display = "none";
+        googleMapRef.style.display = "none";
+        pleaseWaitRef.style.display = "flex";
         // alert(auth.currentUser);
         // console.log(auth.currentUser);
         auth.onAuthStateChanged(async (user)=> {

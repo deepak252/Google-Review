@@ -69,6 +69,7 @@ function initMap (){
         place.formatted_address;
       
       document.getElementById("review-link").value="http://search.google.com/local/writereview?placeid="+place.place_id  //****EDIT******//
+      validateBusinessAddress()
       // generateQR("http://search.google.com/local/writereview?placeid=" + place.place_id)
       infowindow.open(map, marker);
     });

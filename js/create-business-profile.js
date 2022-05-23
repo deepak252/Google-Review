@@ -1,12 +1,18 @@
+const businessAddressRef = document.getElementById("pac-input");
+const reviewLinkRef = document.getElementById("review-link");
+const errorBusinessAddressRef = document.getElementById("error-business-address");
+
+businessAddressRef.oninput = (val) => {
+    reviewLinkRef.value = "";
+    validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusinessAddressRef);
+}
+
 function createBusinessProfile(){
     const businessNameRef = document.getElementById("business-name");
     const businessEmailRef = document.getElementById("business-email");
-    const businessAddressRef = document.getElementById("pac-input");
-    const reviewLinkRef = document.getElementById("review-link");
 
     const errorBusinessNameRef = document.getElementById("error-business-name");
     const errorBusinessEmailRef = document.getElementById("error-business-email");
-    const errorBusinessAddressRef = document.getElementById("error-business-address");
 
     // if (!validateForm()){
     //     return;
@@ -16,6 +22,10 @@ function createBusinessProfile(){
 
     var isFormValid = true;
 
+    // reviewLinkRef.onchange = (evnt)=>{
+    //     alert(evnt.target.value);
+    //     validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusinessAddressRef);
+    // }
 
     if (!validateBusinessName(businessNameRef, errorBusinessNameRef)) {
         businessNameRef.oninput = (val) => {
@@ -29,9 +39,17 @@ function createBusinessProfile(){
         }
         isFormValid = false;
     }
-    if (!validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusinessAddressRef)) {
+    // if (!validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusinessAddressRef)) {
+    //     businessAddressRef.oninput = (val) => {
+    //         reviewLinkRef.value="";
+    //         validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusinessAddressRef);
+    //     }
+    //     isFormValid = false;
+    // }
+    if (!validateBusinessAddress()) {
         businessAddressRef.oninput = (val) => {
-            validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusinessAddressRef);
+            reviewLinkRef.value = "";
+            validateBusinessAddress();
         }
         isFormValid = false;
     }
@@ -113,8 +131,8 @@ function validateBusinessEmail(businessEmailRef, errorBusinessEmailRef) {
     }
 }
 
-
-function validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusinessAddressRef) {
+// businessAddressRef, reviewLinkRef, errorBusinessAddressRef
+function validateBusinessAddress() {
     try {
         if (businessAddressRef.value.trim() === null || businessAddressRef.value.trim() === "") {
             businessAddressRef.style.border = "2px solid red";
@@ -122,7 +140,8 @@ function validateBusinessAddress(businessAddressRef, reviewLinkRef, errorBusines
             return false;
         } 
         else if (reviewLinkRef.value.trim() === null || reviewLinkRef.value.trim() === "") {
-            errorBusinessAddressRef.innerText = "Enter a valid business address";
+            businessAddressRef.style.border = "2px solid red";
+            errorBusinessAddressRef.innerText = "Enter a valid business address (Select from options)";
             return false;
         }
         else {

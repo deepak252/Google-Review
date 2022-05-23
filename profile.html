@@ -28,7 +28,7 @@
     </div>
 
     <div class="footer">
-        <button id="btn-download-pdf" onclick="downloadPDF()">DOWNLOAD PDF</button>
+        <button id="btn-download-pdf" >DOWNLOAD PDF</button>
         <button id="btn-logout" onclick="logout()">LOGOUT</button>
     </div>
     <script>
@@ -75,6 +75,9 @@
                 document.getElementById("review-link").innerText= `${data.reviewLink}`;
                 document.getElementById("review-link").href= `${data.reviewLink}`;
                 generateQR(data.reviewLink);
+                document.getElementById("btn-download-pdf").addEventListener("click",()=>{
+                    downloadPDF2(data);
+                })
             }else{
                 window.location.href = rootPathName+"/index.html";
             }
