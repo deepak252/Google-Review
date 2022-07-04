@@ -1,12 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Place ID Finder</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
+<link rel="stylesheet" href="./css/index.css">
+
 <body>
+    <div id="please-wait">
+        <div id="loader"></div>
+        Please wait...
+    </div>
+    <div class="form-container">
+        <div class="form">
+            <h3>CREATE BUSINESS PROFILE</h3>
+            <!-- <div class="input-field">
+                    <input type="text" placeholder="Name" , name="name" , id="name" />
+                    <p class="error" id="name-error">Name is required</p>
+                </div> -->
+        
+            <div class="input-field">
+                <input type="text" placeholder="Business / Store Name" , name="businessName" , id="business-name" />
+                <p class="error" id="error-business-name"></p>
+            </div>
+        
+            <div class="input-field">
+                <input type="text"  placeholder="Business E-mail ID" , name="businessEmail" , id="business-email" />
+                <p class="error" id="error-business-email"></p>
+            </div>
+        
+            <div class="input-field">
+                <input id="pac-input" class="controls" type="text" placeholder="Business/Store Address" name="businessAddress"
+                    required />
+                <p class="error" id="error-business-address"></p>
+                <!-- <p class="error" id="review-link-error">Enter valid business address</p> -->
+            </div>
+
+            <div class="input-field">
+            <input type="text" id="review-link" name="placeID" placeholder="Enter business/store address to generate review link"
+                readonly>
+            </div>
+        
+            <!-- <input type="text" id="review-link" name="placeID"
+                placeholder="Enter business/store address to generate review link" readonly> -->
+        
+            <button id="btn-create-profile" onclick="createBusinessProfile()">CREATE</button>
+            <button id="btn-logout" onclick="logout()">LOGOUT</button>
+            <!-- <button id="btn-logout" onclick="getCurrentUserProfile()">GET PROFILE</button> -->
+        </div>
+    </div>
+
+
+    <div id="map"></div>
+    <div id="infowindow-content">
+        <span id="place-name" class="title"></span><br />
+        <strong>Place ID:</strong> <span id="place-id"></span><br />
+        <span id="place-address"></span>
+    </div>
+
+    <div style="height: 10px;"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+
+    <!--Initialize google maps API  -->
+    <script src="./js/init-map.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> -->
+    <!-- <script src="./js/generate-qr.js"></script> -->
     
+    <script  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script  src="./js/init-firebase.js"></script>
+    <script src="./js/firebase-auth-services.js"></script>
+    <script  src="./js/firebase-firestore-services.js"></script>
+
+    <script type="text/javascript">
+        var formRef = document.getElementsByClassName("form")[0];
+        var pleaseWaitRef = document.getElementById("please-wait");
+        var googleMapRef = document.getElementById("map");
+        formRef.style.display = "none";
+        googleMapRef.style.display = "none";
+        pleaseWaitRef.style.display = "flex";
+        // alert(auth.currentUser);
+        // console.log(auth.currentUser);
+        auth.onAuthStateChanged(async (user)=> {
+            
+            var pathName = window.location.pathname.toString();
+            var rootPathName = pathName.slice(0, pathName.lastIndexOf('/'));
+            
+            if (user) {
+                // User is signed in.
+                userId = user.uid;
+                var data = await getCurrentUserProfile();
+                formRef.style.display = "block";
+                googleMapRef.style.display = "block";
+                pleaseWaitRef.style.display = "none";
+                //   alert(data);
+                if(data!==null && data!==undefined){
+                    //Profile already exist
+                    window.location.href = rootPathName+"/profile.html";
+                }
+                
+            } else {
+                // User not signed in
+                window.location.href = rootPathName+"/login.html";
+                
+            }
+        });
+    </script>
+
+
+    <!-- <script src="./js/form-validator.js"></script> -->
+    <script src="./js/create-business-profile.js"></script>
+
+    
+
 </body>
+
 </html>

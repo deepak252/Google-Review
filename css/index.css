@@ -1,0 +1,191 @@
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #E6E9F3;
+  font-family: 'Lato', sans-serif;
+}
+
+.form-container{
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form{
+  box-sizing: border-box;
+  text-align: center;
+  background-color: white;
+  margin-top: 50px;
+  padding: 30px 30px;
+  width: 90vw;
+  max-width: 550px;
+  box-shadow: 1px 1px 12px 4px rgb(202, 202, 202);
+}
+
+
+.form .input-field{
+  outline: none;
+  margin: 12px auto;
+  display: block;
+  max-width: 400px;
+}
+
+.form .input-field input{
+  padding: 10px;
+  outline: none;
+  width: calc(100% - 24px);
+  border-radius: 3px;
+  border: 2px solid gray;
+}
+
+.form .error{
+  color: red;
+  font-size: 13px;
+  margin:4px;
+  text-align: left;
+}
+
+.form input:invalid{
+    border: 1px solid red;
+}
+
+
+.form #review-link{
+  border: none;
+  border-bottom: 3px solid gray;
+  background-color: rgb(247, 247, 247);
+} 
+
+
+.form #btn-create-profile{
+  background-color: rgb(22, 74, 189);
+  margin-top: 30px;
+  border: none;
+  padding: 14px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgb(22, 74, 189);
+  transition: background-color 200ms linear;
+}
+.form #btn-create-profile:hover{
+    cursor: pointer;    
+    background-color: white;
+    color : rgb(22, 74, 189);
+    transition: background-color 200ms linear;
+}
+
+
+
+.form #btn-logout{
+  margin: 15px 0;
+  padding: 14px;
+  color: rgb(235, 44, 44);
+  font-weight: bold;
+  font-size: 16px;
+  border: 1px solid rgb(235, 44, 44);
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  transition: background-color 200ms linear;
+}
+.form #btn-logout:hover{
+    cursor: pointer;    
+    background-color: rgb(235, 44, 44);
+    color: white;
+    transition: background-color 200ms linear;
+}
+
+/* Optional: Makes the sample page fill the window. */
+/* FOR GOOGLE MAP */
+#map {
+  height: 50%;
+  margin: 50px auto;
+  width: 90vw;
+  max-width: 550px;
+}
+
+#pac-input{
+  padding: 18px 8px;
+  margin: 0;
+  outline: none;
+  display: block;
+  width: calc(100% );
+  border-radius: 2px;
+  border: 2px solid gray;
+  box-shadow: none;
+}
+
+.controls {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  margin-left: 17px;
+  margin-top: 10px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+.controls:focus {
+  border-color: #4d90fe;
+}
+
+.title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline-block;
+}
+
+
+#please-wait{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+#loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin: 20px auto;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Place ID Finder</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<link rel="stylesheet" href="./css/login.css">
+
+<body>
+    <div id="please-wait">
+        <div id="loader"></div>
+        Please wait...
+    </div>
+    <div class="form-container">
+        <div id="form">
+            <h3>Login</h3>
+        
+            <div class="input-field">
+                <input type="email" placeholder="E-mail ID" , name="email" , id="email" />
+                <p class="error" id="error-email"></p>
+            </div>
+        
+            <div class="input-field">
+                <input type="password" placeholder="Password" , name="password" , id="password" />
+                <p class="error" id="error-password"></p>
+            </div>
+        
+            <button id="btn-login" onclick="login()">LOGIN</button>
+            <p>New user? <a id="register-redirect" href="/register.html"> Register here</a></p>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="./js/init-firebase.js"></script>
+
+    <script src="./js/firebase-error-handler.js"></script>
+    <script src="./js/firebase-auth-services.js"></script>
+
+    <script type="text/javascript">
+       
+        var pathName = window.location.pathname.toString();
+        var rootPathName = pathName.slice(0, pathName.lastIndexOf('/'));
+        document.getElementById("register-redirect").href = rootPathName+"/register.html";
+        auth.onAuthStateChanged(function (user) {
+            
+            if (user) {
+                // User is signed in.
+                window.location.href = rootPathName +"/index.html"
+            } else {
+
+                // No user is signed in.
+            }
+        });
+       
+    </script>
+
+
+
+</body>
+
+</html>

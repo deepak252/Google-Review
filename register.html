@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Place ID Finder</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<link rel="stylesheet" href="./css/register.css">
+
+<body>
+    <div id="please-wait">
+        <div id="loader"></div>
+        Please wait...
+    </div>
+    <div class="form-container">
+        <div id="form">
+            <h3>Create Account</h3>
+            <div class="input-field">
+                <input type="text" placeholder="Name" , name="name" , id="name" />
+                <p class="error" id="error-name"></p>
+            </div>
+        
+            <div class="input-field">
+                <input type="email" placeholder="E-mail ID" , name="email" , id="email" />
+                <p class="error" id="error-email"></p>
+            </div>
+        
+            <div class="input-field">
+                <input type="password" placeholder="Password" , name="password" , id="password" />
+                <p class="error" id="error-password"></p>
+            </div>
+        
+            <div class="input-field">
+                <input type="password" placeholder="Confirm Password" , name="confirmPassword" , id="confirm-password" />
+                <p class="error" id="error-confirm-password"></p>
+            </div>
+        
+        
+            <button id="btn-register" onclick="createUser()">REGISTER</button>
+            <p>Already have an account? <a href="/login.html" id="login-redirect"> Login</a></p>
+        
+        </div>
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="./js/init-firebase.js"></script>
+    
+    <script src="./js/firebase-error-handler.js"></script>
+    <script src="./js/firebase-auth-services.js"></script>
+
+    <script type="text/javascript">
+        // console.log(auth.currentUser);
+        var pathName = window.location.pathname.toString();
+            var rootPathName = pathName.slice(0, pathName.lastIndexOf('/'));
+            document.getElementById("login-redirect").href = rootPathName + "/login.html";
+        auth.onAuthStateChanged(function (user) {
+            var pathName = window.location.pathname.toString();
+            var rootPathName = pathName.slice(0, pathName.lastIndexOf('/'));
+            
+            if (user) {
+                // User is signed in.
+                // window.location.href = rootPathName +"/index.html"
+                const uNameRef = document.getElementById("name");
+                const emailRef = document.getElementById("email");
+                var formRef = document.getElementById("form");
+                var pleaseWaitRef = document.getElementById("please-wait");
+
+                var uid = user.uid;
+
+                var userData = {
+                    'uid': uid,
+                    'name': uNameRef.value,
+                    'email': emailRef.value,
+                }
+                //Adding userData to firestore database
+                db.doc(`users/${uid}`)
+                    .set(userData)
+                    .then((res) => {
+                        console.log("User added successfully");
+                        formRef.style.display = "block";
+                        pleaseWaitRef.style.display = "none";
+                        window.location.href = rootPathName + "/index.html"
+                    })
+                    .catch((error) => {
+                        alert("Something went wrong");
+                        console.error("Error adding document: ", error);
+                        formRef.style.display = "block";
+                        pleaseWaitRef.style.display = "none";
+                    });
+            } else {
+                // No user is signed in.
+            }
+        });
+    </script>
+
+</body>
+
+</html>

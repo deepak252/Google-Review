@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/profile.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div >
+        <div id="card">
+            <div class="top">
+                <img id="img1" src="/images/dgtlmart-logo.png" alt="dgtlmart">
+                <img id="img2" src="/images/google-review-logo.jpg" alt="google-review">
+            </div>
+            <h1>Review Us On Google</h1>
+            <h3 id = "company-name" style="text-align: left;" > </h3>
+            <div id="qrcode"></div>
+            <h3 id="company-address" style="text-align: left;" > </h3>
+            <h3 style="text-align: left;" > Link :- <a href="" id="review-link"></a></h3>
+            <div style="height: 20px;"></div>
+            <h4>DGTLmart Technologies Pvt. Ltd. </h4>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button id="btn-download-pdf" >DOWNLOAD PDF</button>
+        <button id="btn-logout" onclick="logout()">LOGOUT</button>
+    </div>
+    <script>
+        
+    </script>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+<script type="text/javascript" src="js/html2canvas.js"></script>
+<script type="text/javascript" src="js/download-pdf.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="./js/generate-qr.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="./js/init-firebase.js"></script>
+
+<script src="./js/firebase-error-handler.js"></script>
+<script src="./js/firebase-auth-services.js"></script>
+<script src="./js/firebase-firestore-services.js"></script>
+
+
+<script async>
+    var pathName = window.location.pathname.toString();
+    var rootPathName = pathName.slice(0, pathName.lastIndexOf('/'));
+    document.getElementById("img1").src = `${rootPathName}/images/dgtlmart-logo.png`;
+        document.getElementById("img2").src = `${rootPathName}/images/google-review-logo.jpg`;
+
+    auth.onAuthStateChanged(async (user) => {
+        
+        
+        if (user) {
+            // User signed in.
+            userId = user.uid;
+            var data = await getCurrentUserProfile();
+            if (data !== null && data !== undefined) {
+                document.getElementById("company-name").innerText=`Company Name :-  ${data.businessName}`;
+                document.getElementById("company-address").innerText= `Company Address :-  ${data.businessAddress}`;
+                document.getElementById("review-link").innerText= `${data.reviewLink}`;
+                document.getElementById("review-link").href= `${data.reviewLink}`;
+                generateQR(data.reviewLink);
+                document.getElementById("btn-download-pdf").addEventListener("click",()=>{
+                    downloadPDF2(data);
+                })
+            }else{
+                window.location.href = rootPathName+"/index.html";
+            }
+        } else {
+            window.location.href = rootPathName +"/login.html";
+        }
+    });
+
+        //   alert(data);
+    // var userStr = localStorage.getItem("user");
+
+    // if(userStr==null || userStr==undefined || userStr==""){
+    //     console.log(userStr=='');
+    //     console.log(userStr );
+    //     window.location.href = "/register.html"
+    // }
+    // const user = JSON.parse(userStr);
+
+    // document.getElementById("company-name").innerText=`Company Name :-  ${user.businessName}`;
+    // document.getElementById("company-address").innerText= `Company Address :-  ${user.businessAddress}`;
+    // document.getElementById("review-link").innerText= `${user.reviewLink}`;
+    // document.getElementById("review-link").href= `${user.reviewLink}`;
+    // generateQR(user.reviewLink);
+</script>
+
+
+
+</html>
