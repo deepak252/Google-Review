@@ -19,22 +19,27 @@
         <div id="form">
             <h3>Create Account</h3>
             <div class="input-field">
-                <input type="text" placeholder="Name" , name="name" , id="name" />
+                <input type="text" placeholder="Name"  name="name"  id="name" />
                 <p class="error" id="error-name"></p>
             </div>
         
             <div class="input-field">
-                <input type="email" placeholder="E-mail ID" , name="email" , id="email" />
+                <input type="email" placeholder="E-mail ID"  name="email"  id="email" />
                 <p class="error" id="error-email"></p>
+            </div>
+
+            <div class="input-field">
+                <input type="number" placeholder="Phone Number"  name="phone"  id="phone" />
+                <p class="error" id="error-phone"></p>
             </div>
         
             <div class="input-field">
-                <input type="password" placeholder="Password" , name="password" , id="password" />
+                <input type="password" placeholder="Password"  name="password"  id="password" />
                 <p class="error" id="error-password"></p>
             </div>
         
             <div class="input-field">
-                <input type="password" placeholder="Confirm Password" , name="confirmPassword" , id="confirm-password" />
+                <input type="password" placeholder="Confirm Password"  name="confirmPassword"  id="confirm-password" />
                 <p class="error" id="error-confirm-password"></p>
             </div>
         
@@ -69,6 +74,7 @@
                 // window.location.href = rootPathName +"/index.html"
                 const uNameRef = document.getElementById("name");
                 const emailRef = document.getElementById("email");
+                const phoneRef = document.getElementById("phone");
                 var formRef = document.getElementById("form");
                 var pleaseWaitRef = document.getElementById("please-wait");
 
@@ -78,6 +84,7 @@
                     'uid': uid,
                     'name': uNameRef.value,
                     'email': emailRef.value,
+                    'phone': phoneRef.value,
                 }
                 //Adding userData to firestore database
                 db.doc(`users/${uid}`)
