@@ -1,11 +1,13 @@
 const createUser = () =>{
     const uNameRef = document.getElementById("name");
     const emailRef = document.getElementById("email");
+    const phoneRef = document.getElementById("phone");
     const passwordRef = document.getElementById("password");
     const confirmPasswordRef = document.getElementById("confirm-password");
 
     const uNameErrorRef = document.getElementById("error-name");
     const emailErrorRef = document.getElementById("error-email");
+    const phoneErrorRef = document.getElementById("error-phone");
     const passwordErrorRef = document.getElementById("error-password");
     const confirmPasswordErrorRef = document.getElementById("error-confirm-password");
     var isFormValid = true;
@@ -20,6 +22,12 @@ const createUser = () =>{
     if (!validateEmail(emailRef, emailErrorRef)) {
         emailRef.oninput = (val) => {
             validateEmail(emailRef, emailErrorRef);
+        }
+        isFormValid = false;
+    }
+    if (!validatePhone(phoneRef, phoneErrorRef)) {
+        phoneRef.oninput = (val) => {
+            validatePhone(phoneRef, phoneErrorRef);
         }
         isFormValid = false;
     }
@@ -187,6 +195,27 @@ function validateEmail(emailRef, emailErrorRef) {
     }else {
         emailRef.style.border = "2px solid gray";
         emailErrorRef.innerText = "";
+        return true;
+    }
+}
+
+
+function validatePhone(phoneRef, phoneErrorRef) {
+    if (phoneRef.value.trim() === null || phoneRef.value.trim() === "") {
+        phoneRef.style.border = "2px solid red";
+        phoneErrorRef.innerText = "Phone numner is required";
+        return false;
+    } else if (!String(phoneRef.value)
+        .toLowerCase()
+        .match(
+            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+        )) {
+        phoneRef.style.border = "2px solid red";
+        phoneErrorRef.innerText = "Enter a valid phone number";
+        return false;
+    }else {
+        phoneRef.style.border = "2px solid gray";
+        phoneErrorRef.innerText = "";
         return true;
     }
 }
